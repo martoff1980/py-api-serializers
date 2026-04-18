@@ -51,7 +51,7 @@ class MovieSerializer(serializers.ModelSerializer):
         model = Movie
         fields = ["id", "title", "description", "duration", "genres", "actors"]
 
-    def create(self, validated_data):
+    def create(self, validated_data) -> Movie:
         genres = validated_data.pop("genres", [])
         actors = validated_data.pop("actors", [])
         movie = Movie.objects.create(**validated_data)
@@ -59,7 +59,7 @@ class MovieSerializer(serializers.ModelSerializer):
         movie.actors.set(actors)
         return movie
 
-    def update(self, instance, validated_data):
+    def update(self, instance, validated_data) -> Movie:
         genres = validated_data.pop("genres", None)
         actors = validated_data.pop("actors", None)
 
